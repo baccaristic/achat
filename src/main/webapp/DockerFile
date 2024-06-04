@@ -1,0 +1,24 @@
+# Use node image as base
+FROM node:alpine
+
+# Set working directory in the container
+WORKDIR /usr/src
+
+# Copy only necessary Angular-related files
+COPY ./package.json ./package.json
+COPY ./package-lock.json ./package-lock.json
+COPY ./angular.json ./angular.json
+COPY ./tsconfig.json ./tsconfig.json
+COPY ./src/main/webapp ./src/main/webapp
+
+# Install Angular CLI
+RUN npm install -g @angular/cli
+
+# Install dependencies
+RUN npm install
+
+# Expose the port
+EXPOSE 4200
+
+# Command to run the Angular application
+CMD ["ng", "serve", "--host", "0.0.0.0"]
