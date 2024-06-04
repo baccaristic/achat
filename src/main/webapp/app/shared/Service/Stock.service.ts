@@ -7,7 +7,7 @@ import { HttpClient} from '@angular/common/http';
   providedIn: 'root'
 })
 export class StockService {
-  readonly API_URL = 'http://localhost:8083/achat-devops/stock';
+  readonly API_URL = 'achat-devops/stock';
 
   constructor(private httpClient: HttpClient) { }
 
