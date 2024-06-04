@@ -5,23 +5,11 @@ FROM node:alpine AS builder
 WORKDIR /usr/src/app
 
 # Copy only necessary Angular-related files
-COPY package.json package-lock.json angular.json tsconfig.json tsconfig.spec.json tsconfig.app.json proxy.conf.js ./
-COPY src/main/webapp ./src/main/webapp
-
-# Install Angular CLI (if necessary)
-RUN npm install -g @angular/cli
-
-# Copy node_modules from previous stage
-COPY ./node_modules ./node_modules
-
-# Build the Angular app
-RUN npm run build
+COPY ./dist ./
 
 # Stage 2: Serve Angular app with NGINX
 FROM nginx:alpine
 
 # Copy built Angular app from the builder stage
 COPY --from=builder /usr/src/app/dist /usr/share/nginx/html
-
-# Expose port 80
 EXPOSE 4200
