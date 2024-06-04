@@ -1,27 +1,24 @@
-# Use node image as base
-FROM node:alpine
+# Stage 1: Build Angular app
+FROM node:alpine AS builder
 
 # Set working directory in the container
-WORKDIR /usr/src
+WORKDIR /usr/src/app
 
 # Copy only necessary Angular-related files
-COPY ./package.json ./package.json
-COPY ./package-lock.json ./package-lock.json
-COPY ./angular.json ./angular.json
-COPY ./tsconfig.json ./tsconfig.json
-COPY ./tsconfig.spec.json ./tsconfig.spec.json
-COPY ./tsconfig.app.json ./tsconfig.app.json
-COPY ./src/main/webapp ./src/main/webapp
-COPY ./proxy.conf.js ./proxy.conf.js
+COPY package.json package-lock.json angular.json tsconfig.json tsconfig.spec.json tsconfig.app.json proxy.conf.js ./
+COPY src/main/webapp ./src/main/webapp
 
 # Install Angular CLI
 RUN npm install -g @angular/cli
 
-# Install dependencies
-RUN npm install --legacy-peer-deps
+# Build the Angular app
+RUN npm run build
 
-# Expose the port
+# Stage 2: Serve Angular app with NGINX
+FROM nginx:alpine
+
+# Copy built Angular app from the builder stage
+COPY --from=builder /usr/src/app/dist /usr/share/nginx/html
+
+# Expose port 80
 EXPOSE 4200
-
-# Command to run the Angular application
-ENTRYPOINT ["ng", "serve", "--host", "0.0.0.0"]
