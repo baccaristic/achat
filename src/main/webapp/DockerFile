@@ -8,8 +8,11 @@ WORKDIR /usr/src/app
 COPY package.json package-lock.json angular.json tsconfig.json tsconfig.spec.json tsconfig.app.json proxy.conf.js ./
 COPY src/main/webapp ./src/main/webapp
 
-# Install Angular CLI
+# Install Angular CLI (if necessary)
 RUN npm install -g @angular/cli
+
+# Copy node_modules from previous stage
+COPY --from=previous_stage /usr/src/app/node_modules ./node_modules
 
 # Build the Angular app
 RUN npm run build
