@@ -3,5 +3,7 @@ version: '3.8'
 services:
   angular-app:
     image: toutoutn/achat-front-devops:1.0.0
+    environment:
+      NODE_OPTIONS: --openssl-legacy-provider
     ports:
       - "4200:4200"
