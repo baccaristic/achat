@@ -5,7 +5,7 @@ FROM node:alpine AS builder
 WORKDIR /usr/src/app
 
 # Copy only necessary Angular-related files
-COPY ./dist ./
+COPY ./dist ./dist
 
 # Stage 2: Serve Angular app with NGINX
 FROM nginx:alpine
