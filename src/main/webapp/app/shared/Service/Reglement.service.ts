@@ -6,7 +6,7 @@ import {HttpClient} from '@angular/common/http';
   providedIn: 'root'
 })
 export class ReglementService {
-  readonly API_URL = 'http://localhost:8089/achat-devops/reglement';
+  readonly API_URL = 'http://localhost:8083/achat-devops/reglement';
 
   constructor(private httpClient: HttpClient) {
   }
