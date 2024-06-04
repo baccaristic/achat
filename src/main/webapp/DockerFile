@@ -12,6 +12,7 @@ COPY ./tsconfig.json ./tsconfig.json
 COPY ./tsconfig.spec.json ./tsconfig.spec.json
 COPY ./tsconfig.app.json ./tsconfig.app.json
 COPY ./src/main/webapp ./src/main/webapp
+COPY ./proxy.conf.js ./proxy.conf.js
 
 # Install Angular CLI
 RUN npm install -g @angular/cli
