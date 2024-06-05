@@ -2,11 +2,15 @@
   "name": "crudtuto-front",
   "version": "0.0.0",
   "scripts": {
+    "build-and-publish": "npm run build && npm run copy-package-json && npm run increment-version && npm run publish",
     "ng": "ng",
     "start": "set NODE_OPTIONS=--openssl-legacy-provider && ng serve",
     "build": "set NODE_OPTIONS=--openssl-legacy-provider && ng build --prod",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "copy-package-json": "cp package.json dist/",
+    "increment-version": "node increment-version.js",
+    "publish": "cd dist && npm publish --registry http://localhost:4873"
   },
   "dependencies": {
     "@angular/animations": "~12.0.1",
