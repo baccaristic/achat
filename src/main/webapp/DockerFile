@@ -17,6 +17,9 @@ COPY ./proxy.conf.js ./proxy.conf.js
 # Install Angular CLI
 RUN npm install -g @angular/cli
 
+# Install dependencies
+RUN npm install --legacy-peer-deps
+
 # Expose the port
 EXPOSE 4300
 
