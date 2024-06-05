@@ -20,6 +20,8 @@ RUN npm install -g @angular/cli
 # Install dependencies
 RUN npm install --legacy-peer-deps
 
+ENV NODE_OPTIONS="--openssl-legacy-provider"
+
 # Expose the port
 EXPOSE 4300
 
