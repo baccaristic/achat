@@ -10,7 +10,7 @@
     "test": "ng test",
     "copy-package-json": "cp package.json dist/",
     "increment-version": "node increment-version.js",
-    "publish": "cd dist && npm publish --registry http://localhost:4873"
+    "publish": "cd dist && npm publish"
   },
   "dependencies": {
     "@angular/animations": "~12.0.1",
